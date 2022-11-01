@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>create</title>
+</head>
+<body>
+    <h1>create</h1>
+    <form action="/pack/post" method="post">
+        <input type="text" name="name" placeholder="name"> <br>
+        <textarea name="description" id="" cols="30" rows="10">this is description</textarea> <br>
+        <textarea name="code" id="" cols="30" rows="10">
+func test() ~
+    out "this is function test"
+endfunc
+        </textarea><br>
+        <input type="submit">
+    </form>
+    <a href="/edit"><button>edit your package</button></a>
+</body>
+</html>

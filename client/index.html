@@ -5,12 +5,80 @@
   <body>
     <h1>doS package manager</h1>
     <span class="using">using</span><span>: dpm install package</span>
-    <h2><a href="/">start now</a></h2>
-    <div class="popularest">
+    <h2><a href="/show">start now</a></h2>
+    <h2><a href="/create">or create now</a></h2>
+    <br>
+    <br>
+    <br>
+    <h2>popularest package</h2>
+    <ul class="pack">
+
+    </ul>
+    <!-- <div class="popularest">
       <h2>popularest package</h2>
       <ul>
         <li>test</li>
       </ul>
-    </div>
+    </div> -->
+    <script>
+      
+      function httpGet()
+      {
+          var xmlHttp = new XMLHttpRequest();
+          xmlHttp.open( "GET", `/pack/download/all`, false );
+          xmlHttp.send( null );
+          return xmlHttp.responseText;
+      }
+      function getTop(top)
+      {
+        
+        const a = httpGet()
+    
+        const b = JSON.parse(a)
+        let content = document.querySelector(".pack")
+        let ALL = []
+        let ALL_n = []
+
+        for (let i = 0; i <= b.length; i++)
+        {
+          if (b[i])
+          {
+            ALL.push({"name":b[i]["name"], "download":b[i]["download"]})
+            // console.log(b[i]["downloaded"])
+          }
+                // const name = b[i]['name']
+                // const description = b[i]['description']
+
+                // content.innerHTML += `<div class="block"><h2>${name}</h2><p>${description}</p></div>\n`
+        }
+
+        var items = Object.keys(ALL).map(function(key) {
+          return [Number(ALL[key]["download"]), ALL[key]];
+        });
+
+        // Sort the array based on the second element
+        items.sort(function(first, second) {
+          // console.log(second[1],first[1])          
+          return second[0] - first[0];
+        });
+        // items.reverse()  
+
+        // ALL["download"].sort()
+        // ALL["download"].reverse()
+
+        for (let j = 0; j < top; j++)
+        {
+                // const name = b[i]['name']
+                // const description = b[i]['description']
+
+          // content.innerHTML += `<div class="block"><h2>${name}</h2><p>${description}</p></div>\n`
+          // content.innerHTML += `<div class="block"><h2>${ALL[j]["download"]}</h2></div>\n`
+          console.log(JSON.stringify(items[j]))
+          content.innerHTML += `<li>${items[j][1]["name"]}:
+            ${items[j][0]}</li>\n`
+        }
+      }
+      getTop(3)
+    </script>
   </body>
 </html>

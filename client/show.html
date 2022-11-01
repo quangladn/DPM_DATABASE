@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>show</title>
+    <style>
+        html {
+            font-family: 'Courier New', Courier, monospace;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>all pack</h1>
+        <input type="text" id="search" name="search" placeholder="package">
+        <button onclick="runSearch()">((find))</button>
+    </div>
+    <div class="pack">
+
+    </div>
+    <script>
+        function httpGet(search)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", `/pack/__/${search}`, false );
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
+        function runSearch()
+        {
+            const search = document.getElementById("search").value
+            const a = httpGet(search)
+            console.log(search)
+
+            const b = a.split(",")
+            let content = document.querySelector(".pack")
+            content.innerHTML = ""
+            const name = b[0]
+            const description = b[1]
+
+            content.innerHTML += `<div class="block"><h2>${name}</h2><p>${description}</p></div>\n`
+        }
+        function getAll() 
+        {
+            const a = httpGet("all")
+    
+            const b = JSON.parse(a)
+            let content = document.querySelector(".pack")
+    
+            for (let i = 0; i <= b.length; i++)
+            {
+                    const name = b[i]['name']
+                    const description = b[i]['description']
+    
+                    content.innerHTML += `<div class="block"><h2>${name}</h2><p>${description}</p></div>\n`
+            }
+
+        }
+        getAll()
+    </script>
+</body>
+</html>

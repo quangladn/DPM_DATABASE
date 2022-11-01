@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>edit</title>
+</head>
+<body>
+    <h1>edit your package</h1>
+    <h2>input name and key</h2>
+    <input type="text" name="name" id="name" placeholder="name package"> <br>
+    <input type="text" name="key" id="key" placeholder="key update package"> <br>
+    <button onclick="httpPush()">start</button>
+    <div class="edit">
+
+    </div>
+    <!-- <form action="/pack/"></form>
+    <h2>edit</h2>
+    <textarea name="code" id="code" cols="30" rows="10"></textarea> <br>
+    <textarea name="description" id="description" cols="30" rows="10"></textarea> <br>
+    <button onclick="httpPush()">submit</button>
+    <div class="out"></div> -->
+
+    
+    <script>
+        function httpGet(search)
+        {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open( "GET", `/pack/__/${search}`, false );
+            xmlHttp.send( null );
+            return xmlHttp.responseText;
+        }
+        function httpPush()
+        {
+            const name_pack = document.getElementById("name").value
+            const name_ = httpGet(name_pack)
+            // const name_ = JSON.parse(name__)
+            const name = name_.split(",")
+            const key = document.getElementById("key").value
+
+            // var xmlHttp = new XMLHttpRequest();
+            // xmlHttp.open( "PATCH", `/pack/${name[0]}/${key}`, true );
+            // xmlHttp.send( {"code":newCode,"description":newDescription} );
+            let output = document.querySelector(".edit")
+            output.innerHTML = `<form action="/pack/${name_pack}/${key}" method="post">
+    <h2>edit</h2>
+    <h3>code</h3>
+    <textarea name="code" id="code" cols="30" rows="10"></textarea> <br>
+    <h3>description</h3>
+    <textarea name="description" id="description" cols="30" rows="10"></textarea> <br>
+    <input type="submit"></form>`
+        }
+    </script>
+</body>
+</html>

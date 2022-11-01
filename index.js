@@ -11,6 +11,18 @@ app.use("/",package)
 app.get("/",(rep,res) => {
   res.sendFile(__dirname+"/client/index.html")
 })
+app.get("/create",(rep,res) => {
+  res.sendFile(__dirname+"/client/create.html")
+})
+app.get("/show",(rep,res) => {
+  res.sendFile(__dirname+"/client/show.html")
+})
+app.get("/edit",(rep,res) => {
+  res.sendFile(__dirname+"/client/edit.html")
+})
+app.get("/delete",(rep,res) => {
+  res.sendFile(__dirname+"/client/index.html")
+})
 
 
 const port = process.env.PORT || 3000
