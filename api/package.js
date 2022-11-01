@@ -26,7 +26,7 @@ router.post("/pack/post",(rep,res) => {
     const keyUpdate = uuidv4()
     data.push({...rep.body,key:keyUpdate,downloaded:0})
     fs.writeFileSync("./api/data.json",JSON.stringify(data),{encoding:"utf-8"})
-    console.log(rep.body)
+    console.log(keyUpdate)
     res.send(`success! key update: ${keyUpdate}`)
   }
 })
